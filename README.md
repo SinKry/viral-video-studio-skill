@@ -6,34 +6,75 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/platform-Douyin%20%7C%20Bilibili%20%7C%20Xiaohongshu-brightgreen)](#)
-[![Hermes Agent Skill](https://img.shields.io/badge/Hermes%20Agent-Skill-blue)](#)
+[![Hermes Agent Skill](https://img.shields.io/badge/Hermes%20Agent-Skill-blue)](#installation)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Supported-purple)](#installation)
+[![OpenClaw](https://img.shields.io/badge/OpenClaw-Supported-orange)](#installation)
+[![Codex](https://img.shields.io/badge/Codex-Supported-green)](#installation)
 
 ---
 
 ## ✨ 这是什么？
 
-一个给 AI Agent（Hermes Agent）使用的 Skill，让你的 AI 助手变成**千万粉自媒体博主**：
+一个给 AI Agent 使用的 Skill，让你的 AI 助手变成**千万粉自媒体博主**：
 
 1. **🔍 视频拆解** — 输入任意视频链接（抖音/B站/小红书等），AI 自动下载视频、逐帧提取画面、识别字幕，然后从 6 大维度深度拆解
 2. **📊 资产库** — 拆解结果自动写入飞书多维表格，12 个爆款基因标签，形成长期积累的优质案例库
 3. **📝 脚本工坊** — 基于积累的案例库 + 千万粉博主视角，为用户优化或生成完整视频脚本（含口播文案 + 画面建议）
 
-## 🚀 Quick Start
+---
 
-### 安装
+## 🚀 Installation
+
+### Hermes Agent
 
 ```bash
-# 安装到 Hermes Agent
+# 方式一：使用 Hermes CLI
 hermes skill add viral-video-studio
+
+# 方式二：手动复制
+cp -r viral-video-studio ~/.hermes/skills/social-media/viral-video-studio/
 ```
 
-或者手动复制：
+安装后重启 Hermes Agent 即可使用。
+
+### Claude Code
 
 ```bash
-cp -r viral-video-studio ~/.hermes/skills/social-media/
+# 方式一：个人级别安装（推荐）
+cp -r viral-video-studio ~/.claude/skills/viral-video-studio/
+
+# 方式二：项目级别安装
+cp -r viral-video-studio /your/project/.claude/skills/viral-video-studio/
 ```
 
-### 使用
+Claude Code 会自动读取 `CLAUDE.md` 作为入口，完整指令在 `SKILL.md` 中。
+
+### OpenClaw
+
+```bash
+# 方式一：使用 OpenClaw CLI（推荐）
+openclaw skills install git:SinKry/viral-video-studio
+
+# 方式二：手动复制
+cp -r viral-video-studio ~/.openclaw/skills/viral-video-studio/
+```
+
+OpenClaw 会自动识别 `SKILL.md` 格式的 Skill 定义。
+
+### Codex (OpenAI)
+
+```bash
+# 克隆仓库到本地
+git clone https://github.com/SinKry/viral-video-studio.git
+
+# AGENTS.md 会被 Codex 自动加载
+```
+
+Codex 会自动读取仓库根目录的 `AGENTS.md` 作为指令入口，`SKILL.md` 提供完整的拆解框架定义。
+
+---
+
+## 📋 使用方式
 
 **拆解视频：**
 ```
@@ -49,6 +90,8 @@ cp -r viral-video-studio ~/.hermes/skills/social-media/
 ```
 帮我优化这个脚本：[粘贴你的脚本]
 ```
+
+---
 
 ## 📐 拆解框架（6 维度 × 12 标签）
 
@@ -80,6 +123,8 @@ cp -r viral-video-studio ~/.hermes/skills/social-media/
 | 系列追更 | 续集效应/系列感驱动 |
 | 热点借势 | 蹭热点/时效性内容 |
 
+---
+
 ## 📦 资产库（Feishu Bitable）
 
 自动创建飞书多维表格，字段结构：
@@ -98,23 +143,38 @@ cp -r viral-video-studio ~/.hermes/skills/social-media/
 | 逐字稿 | 文本 | 按时间戳的完整字幕 |
 | ... | ... | 更多字段见 SKILL.md |
 
+---
+
 ## 🛠 技术栈
 
 - **视频提取**: yt-dlp（抖音/B站/快手） + 浏览器 fallback（小红书/视频号）
 - **关键帧分析**: ffmpeg 抽帧 + Vision AI 模型
 - **字幕提取**: yt-dlp 字幕 → 无字幕时 vision 逐帧 OCR
 - **资产库**: 飞书 Bitable API（lark-cli）
-- **运行环境**: [Hermes Agent](https://github.com/nousresearch/hermes-agent)
+
+### 平台兼容性
+
+| 文件 | Hermes Agent | Claude Code | OpenClaw | Codex |
+|------|:---:|:---:|:---:|:---:|
+| `SKILL.md` | ✅ 主入口 | ✅ 参考 | ✅ 主入口 | ✅ 参考 |
+| `CLAUDE.md` | — | ✅ 主入口 | — | — |
+| `AGENTS.md` | — | — | — | ✅ 主入口 |
+
+---
 
 ## 📁 项目结构
 
 ```
 viral-video-studio/
-├── README.md          # 你正在看的这个文件
+├── README.md          # 项目说明 & 安装指南
 ├── LICENSE            # MIT License
-├── SKILL.md           # 核心 Skill 定义（给 AI Agent 读的）
+├── SKILL.md           # 核心 Skill 定义（Hermes/OpenClaw 主入口）
+├── CLAUDE.md          # Claude Code 入口
+├── AGENTS.md          # Codex 入口
 └── .gitignore
 ```
+
+---
 
 ## 🤝 Contributing
 
