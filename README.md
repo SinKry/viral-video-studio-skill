@@ -1,4 +1,4 @@
-# 🎬 Viral Video Studio
+# 🎬 Viral Video Studio Skill
 
 **AI 驱动的自媒体爆款拆解与脚本工坊**
 
